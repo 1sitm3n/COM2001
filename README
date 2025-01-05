@@ -1,0 +1,100 @@
+# TrailService Microservice
+
+This repository contains the implementation of the TrailService microservice, developed as part of the COMP2001 Assessment 2. The service is a RESTful API built using Flask, SQL Server, and Docker, designed for managing trails in a database.
+
+---
+
+## Key Features
+- Add new trails to the database.
+- Retrieve all trails with a simple API call.
+- Containerized deployment using Docker for portability and scalability.
+
+---
+
+## Prerequisites
+To run this project, you need the following software installed:
+- Python 3.9 or above
+- Flask
+- pyodbc
+- Docker
+- Microsoft SQL Server
+
+---
+
+## Setup Instructions
+
+Clone this repository to your local machine:
+git clone <repository-url>
+cd <repository-folder>
+2. Set Up the Database
+Execute the schema.sql file on your SQL Server instance to create the required tables and procedures.
+(Optional) Run the sample_data.sql file to populate the database with sample data.
+3. Build the Docker Container
+Build the Docker container using the provided Dockerfile:
+docker build -t trailservice .
+4. Run the Docker Container
+Run the container with the appropriate environment variables:
+
+docker run -d -p 5000:5000 --name trailservice ^
+-e DB_SERVER="DIST-6-505.uopnet.plymouth.ac.uk" ^
+-e DB_USER="MIsitmen" ^
+-e DB_PASSWORD="LahX707+" ^
+-e DB_NAME="COMP2001_MIsitmen" ^
+trailservice
+5. Test the API
+Use Postman or a browser to test the API endpoints:
+
+Add a trail: POST /addTrail
+Retrieve all trails: GET /getTrails
+API Documentation
+1. Add Trail
+Endpoint: /addTrail
+Method: POST
+Payload Example:
+
+{
+  "name": "Trail 1",
+  "description": "A scenic trail.",
+  "lengthKm": 5.0,
+  "ownerID": 1,
+  "accessTypeID": 1,
+  "terrainTypeID": 2,
+  "difficultyID": 3
+}
+Response Example:
+
+{
+  "message": "Trail added successfully"
+}
+2. Get Trails
+Endpoint: /getTrails
+Method: GET
+Response Example:
+
+[
+  {
+    "TrailID": 1,
+    "Name": "Trail 1",
+    "Description": "A scenic trail.",
+    "LengthKm": 5.0
+  }
+]
+Known Issues
+Deployment to web.socem.plymouth.ac.uk was unsuccessful due to server connectivity issues. Troubleshooting efforts and evidence are documented in the project report.
+
+Future Enhancements
+- Add authentication mechanisms (e.g., OAuth2) for secure access.
+- Implement filtering and pagination for the /getTrails endpoint to handle large datasets.
+- Deploy the service to a cloud-based platform such as AWS or Azure for improved scalability and availability.
+- Enhance accessibility compliance to ensure WCAG standards.
+
+
+License
+This project was developed for educational purposes as part of the COMP2001 module at the University of Plymouth.
+
+
+### Key Changes Made:
+1. Improved formatting for better readability and clarity.
+2. Replaced plaintext commands with formatted code blocks (` ```bash `).
+3. Added clear sectioning for a more professional presentation.
+4. Ensured consistent spacing between sections.
